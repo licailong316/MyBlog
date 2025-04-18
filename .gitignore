@@ -1,0 +1,77 @@
+# Python 忽略项
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+*.env
+*.venv
+env/
+venv/
+ENV/
+VENV/
+pip-log.txt
+pip-delete-this-directory.txt
+# Python bytecode
+*.pyc
+
+# Django 特定忽略项
+db.sqlite3
+*.sqlite3
+*.log
+*.pot
+*.mo
+*.swp
+*.swo
+*.bak
+*.tmp
+local_settings.py
+
+# Django migrations
+**/migrations/
+!**/migrations/__init__.py
+
+# Django static and media files
+staticfiles/
+static/
+media/
+assets/
+dist/
+
+# VSCode 工作目录配置（可选）
+.vscode/
+
+# PyCharm 项目文件
+.idea/
+
+# 如果你使用的是 JetBrains Rider，也可以加上：
+.idea_modules/
+
+# Mac OS 特定文件
+.DS_Store
+
+# Windows 特定文件
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# pytest 缓存
+.pytest_cache/
+
+# 覆盖测试等报告
+htmlcov/
+coverage.xml
+*.cover
+.tox/
+.nox/
+.cache/
+nosetests.xml
+test-results/
+
+# Jupyter Notebook 检测
+.ipynb_checkpoints/
+
+# 环境变量等配置
+.env
+.env.*
+
