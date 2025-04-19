@@ -100,11 +100,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# 开发环境下的静态文件目录
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-
 # 生产环境收集后的静态文件输出目录
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
