@@ -76,5 +76,5 @@ test-results/
 .env.*
 
 # 配置文件
-uwsgi.ini
+*.ini
 
