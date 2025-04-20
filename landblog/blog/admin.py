@@ -2,6 +2,7 @@ from django.urls import reverse
 from django.utils.html import format_html
 from django.contrib import admin
 from .models import Category, Tag, Article
+from .adminforms import ArticleAdminForm
 
 
 # 分类管理
@@ -70,6 +71,7 @@ class CategoryOwnerFilter(admin.SimpleListFilter):
 # 文章管理
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
+    form = ArticleAdminForm
     # 列表显示字段
     list_display = ['title', 'category', 'created_at', 'updated_at','operator', 'author']
     # 设置点击哪一列可以进入编辑页
