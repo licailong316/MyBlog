@@ -63,6 +63,7 @@ class Article(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name="更新时间")
 
     class Meta:
+        verbose_name = verbose_name_plural = '文章'
         ordering = ['-is_top', '-created_at']
 
     def __str__(self):
