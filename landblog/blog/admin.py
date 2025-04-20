@@ -22,6 +22,10 @@ class CategoryAdmin(admin.ModelAdmin):
         obj.author = request.user
         return super(CategoryAdmin, self).save_model(request, obj, form, change)
 
+    def get_queryset(self, request):
+        qs = super(CategoryAdmin, self).get_queryset(request)
+        return qs.filter(author=request.user)
+
 
 # 标签管理
 @admin.register(Tag)
@@ -40,6 +44,10 @@ class TagAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         obj.author = request.user
         return super(TagAdmin, self).save_model(request, obj, form, change)
+
+    def get_queryset(self, request):
+        qs = super(TagAdmin, self).get_queryset(request)
+        return qs.filter(author=request.user)
 
 
 class CategoryOwnerFilter(admin.SimpleListFilter):
@@ -103,3 +111,7 @@ class ArticleAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         obj.author = request.user
         return super(ArticleAdmin, self).save_model(request, obj, form, change)
+
+    def get_queryset(self, request):
+        qs = super(ArticleAdmin, self).get_queryset(request)
+        return qs.filter(author=request.user)
