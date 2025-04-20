@@ -1,10 +1,225 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh" data-theme="light">
+
 <head>
-    <meta charset="UTF-8">
-    <title>LandBlog</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>MyBlog</title>
+    <style>
+        :root {
+          --bg: #fefaf3;
+          /* 背景：奶白中带一点温暖黄 */
+          --fg: #222222;
+          /* 前景：深灰色，保护视力 */
+          --card: #f7f1e8;
+          /* 卡片背景：淡奶油色 */
+          --border: #e0dcd2;
+          /* 边框：柔和的灰黄色 */
+        }
+
+
+        [data-theme="dark"] {
+          --bg: #2f2f2f;
+          --text: #eaeaea;
+          --card: #3a3a3a;
+          --border: #444;
+        }
+
+        body {
+          margin: 0;
+          font-family: 'Helvetica Neue', sans-serif;
+          background: var(--bg);
+          color: var(--text);
+          transition: background 0.3s, color 0.3s;
+        }
+
+
+        /* 顶部导航 */
+        header {
+          padding: 1rem 10rem;
+          /* 左右加大 */
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 1px solid var(--border);
+        }
+
+        .nav-center {
+          display: flex;
+          gap: 1.5rem;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .nav-center a {
+          text-decoration: none;
+          color: var(--text);
+          font-weight: 500;
+        }
+
+        .nav-center a:hover {
+          text-decoration: underline;
+        }
+
+        .nav-right {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .search {
+          position: relative;
+        }
+
+        .search input {
+          padding: 0.4rem 1.8rem 0.4rem 0.6rem;
+          border: 1px solid var(--border);
+          border-radius: 4px;
+          background: transparent;
+          color: var(--text);
+        }
+
+        .search svg {
+          position: absolute;
+          right: 6px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 16px;
+          height: 16px;
+          fill: var(--text);
+          pointer-events: none;
+        }
+
+        .theme-toggle {
+          background: none;
+          border: none;
+          font-size: 1.1rem;
+          cursor: pointer;
+          color: var(--text);
+        }
+
+        main {
+          max-width: 900px;
+          margin: 3rem auto;
+          padding: 0 1.5rem;
+        }
+
+        h1 {
+          text-align: center;
+          font-size: 2.5rem;
+          margin-bottom: 0.3rem;
+        }
+
+        p.subtitle {
+          text-align: center;
+          font-size: 1rem;
+          color: #888;
+          margin-bottom: 3rem;
+        }
+
+        .posts {
+          display: grid;
+          gap: 2rem;
+        }
+
+        .post-card {
+          background: var(--card);
+          border: 1px solid var(--border);
+          border-radius: 8px;
+          padding: 1.2rem 1.5rem;
+          transition: box-shadow 0.2s;
+        }
+
+        .post-card:hover {
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .post-card h2 {
+          margin-top: 0;
+          margin-bottom: 0.6rem;
+          font-size: 1.2rem;
+        }
+
+        .post-card p,
+        .post-card span {
+          margin: 0;
+          line-height: 1.6;
+          color: #666;
+        }
+
+        footer {
+          text-align: center;
+          font-size: 0.85rem;
+          padding: 2rem 0;
+          color: #aaa;
+        }
+    </style>
 </head>
+
 <body>
-<h1>基于Django的个人博客系统</h1>
+<header>
+    <div class="nav-center">
+        <a href="#">首页</a>
+        <a href="#">分类</a>
+        <a href="#">归档</a>
+        <a href="#">关于</a>
+    </div>
+    <div class="nav-right">
+        <div class="search">
+            <input type="text" placeholder="搜索..."/>
+            <svg viewBox="0 0 24 24">
+                <path
+                        d="M10,18A8,8 0 1,1 18,10A8,8 0 0,1 10,18M21.71,20.29L16.37,15C17.55,13.55 18.22,11.8 18.22,10A8.22,8.22 0 1,0 10,18.22A8.22,8.22 0 0,0 16.37,15L21.71,20.29Z"/>
+            </svg>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()" title="切换主题">🌙</button>
+    </div>
+</header>
+
+<main>
+    <h1>欢迎来到我的博客</h1>
+    <p class="subtitle">记录、思考、持续创造</p>
+
+    <section class="posts">
+
+        {% for post in post_list %}
+        <div class="post-card">
+            <h2>{{ post.title }}</h2>
+            <span>作者：{{ post.author.username }}</span>
+            <span>分类：{{ post.category.name }}</span>
+            <span>更新时间：{{ post.updated_at }}</span>
+            <p>{{ post.desc }}</p>
+        </div>
+        {% endfor %}
+
+        <div class="post-card">
+            <h2>如何用Django搭建博客系统</h2>
+            <p>本文将从建模、视图、模板三方面完整带你实现一个简洁博客...</p>
+        </div>
+        <div class="post-card">
+            <h2>Markdown 写作美学</h2>
+            <p>为什么越来越多的人用 Markdown 写作？它不仅高效，而且极具美感。</p>
+        </div>
+        <div class="post-card">
+            <h2>我的开发工具推荐清单</h2>
+            <p>从编辑器、插件到终端工具，这是我认为最值得长期使用的工具集。</p>
+        </div>
+    </section>
+</main>
+
+<footer>
+    &copy; 2025 极简博客 — 设计即表达
+</footer>
+
+<script>
+    function toggleTheme() {
+      const root = document.documentElement;
+      const current = root.getAttribute("data-theme");
+      const next = current === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      document.querySelector(".theme-toggle").textContent = next === "dark" ? "☀️" : "🌙";
+    }
+</script>
 </body>
+
 </html>
