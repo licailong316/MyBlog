@@ -63,7 +63,7 @@ class CategoryOwnerFilter(admin.SimpleListFilter):
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
     # 列表显示字段
-    list_display = ['title', 'category', 'created_at', 'operator', 'author']
+    list_display = ['title', 'category', 'created_at', 'updated_at','operator', 'author']
     # 设置点击哪一列可以进入编辑页
     list_display_links = ['title']
 
